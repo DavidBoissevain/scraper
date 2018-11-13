@@ -47,6 +47,7 @@ public class Scraper {
 
                     Elements specification = category.select("div");
                     //System.out.println(specification.text());
+                    //pk
                     for (Element  s: specification) {
                         String spec = "         <"+s.select("dt").text()+">"+s.select("dd").text()+"</"+s.select("dt").text()+">";
                         if (!s.select("dd").text().equals("")) {
