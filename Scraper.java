@@ -4,7 +4,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.*;
 
-//test1
+//test12
 public class Scraper {
     public static void main(String[] args) throws Exception {
         List<String> prices;
