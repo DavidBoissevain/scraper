@@ -3,8 +3,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.*;
-
-
+/**
+ * A Coolblue scraper which scrapes the title, price, amount of reviews, rating and all the specifications.
+ */
 public class Scraper {
     public static void main(String[] args) throws Exception {
         List<String> prices;
