@@ -10,7 +10,7 @@ public class Scraper {
     public static void main(String[] args) throws Exception {
         List<String> prices;
         List<String> reviews;
-        for (int i = 819300; i<= 1000000; i++){
+        for (int i = 819196; i<= 1000000; i++){
             //Fetch the URL's for the product pages and the reviews of the product pages
             String URL = "https://www.coolblue.nl/en/product/";
             URL = URL + i;
@@ -29,7 +29,7 @@ public class Scraper {
                 reviews = document.select("a.review-rating--reviews-link").eachText();
                 String ratings = documentr.select("span.review-rating--enhanced-score").text();
                 String title = document.select("span.js-product-name").text();
-                System.out.println("<product  product_ID = "+ i + ">" );
+                System.out.println("<product  product_ID = \""+ i + "\">" );
                 System.out.println("    <title>" + title + "</title>");
                 System.out.println("    <price>" + prices.get(0) + "</price>");
                 //If there are no reviews written yet, replace it by "0 reviews" to be in line with others
@@ -45,16 +45,19 @@ public class Scraper {
                 System.out.println("    <specifications>");
                 Elements spec_cats = document.select("div.js-specifications-content div.grid-section-xs--gap-6");
                 for (Element category: spec_cats){
+                    boolean skipFirstspec = true;
                     String thisCategory = category.select("h3").text();
-                    System.out.println("         <"+thisCategory.toLowerCase().replaceAll(" ", "-" ) +"-specifications>");
+                    System.out.println("         <"+thisCategory.toLowerCase().replaceAll(" ", "-" ).replaceAll("&", "and") +"-specifications>");
                     Elements specification = category.select("div");
                     for (Element  s: specification) {
                         String spec = "               <"+deDup(s.select("dt").text()).toLowerCase()+">"+s.select("dd").text()+"</"+deDup(s.select("dt").text()).toLowerCase()+">";
-                        if (!s.select("dd").text().equals("")) {
+                        //Prevents printing out empty specs and skips the first spec as this is a spec that list all specs in its category.
+                        if (!(s.select("dd").text().equals("")) && !skipFirstspec) {
                             System.out.println(spec);
                         }
+                        skipFirstspec = false;
                     }
-                    System.out.println("         </"+thisCategory.toLowerCase().replaceAll(" ", "-" )  +"-specifications>");
+                    System.out.println("         </"+thisCategory.toLowerCase().replaceAll(" ", "-" ).replaceAll("&", "and")  +"-specifications>");
                 }
                 System.out.println("	</specifications>");
                 //End of specification scraping code
