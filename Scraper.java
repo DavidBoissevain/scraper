@@ -34,11 +34,15 @@ public class Scraper {
                 System.out.println("    <price>" + prices.get(0) + "</price>");
                 //If there are no reviews written yet, replace it by "0 reviews" to be in line with others
                 if (reviews.get(0).equals("Write first review")){
-                    System.out.println("    <ratings>" + "0 reviews" + "</ratings>");
+                    System.out.println("    <review>");
+                    System.out.println("        <reviews>" + "0 reviews" + "</reviews>");
+                    System.out.println("    </review>");
                 }
                 else{
-                    System.out.println("    <reviews>" + reviews.get(0) + "</reviews>");
-                    System.out.println("    <rating>" + ratings + "</rating>");
+                    System.out.println("    <review>");
+                    System.out.println("        <reviews>" + reviews.get(0) + "</reviews>");
+                    System.out.println("        <rating>" + ratings + "</rating>");
+                    System.out.println("    </review>");
                 }
 
                 //Code that scrapes specifications
